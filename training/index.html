@@ -58,6 +58,31 @@ h1 span{width:7px;height:7px;border-radius:50%;background:var(--acc);flex:none}
 }
 .seg button[aria-selected="true"]{background:var(--acc);color:#0b0d10}
 
+/* ---------- week calendar ---------- */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.wd{
+  background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:9px 2px 8px;text-align:center;
+}
+.wd span{
+  display:block;font-size:9.5px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--dim2);
+}
+.wd b{display:block;font-size:16px;font-weight:700;margin-top:3px;color:#3c454f;line-height:1.1}
+.wd.on b{color:var(--acc)}
+.wd.now{border-color:var(--acc);background:var(--acc-dim)}
+.wd.now span{color:#c8dfa0}
+.wd.now b{color:var(--text)}
+.wd.now.on b{color:var(--acc)}
+.legend{font-size:11.5px;color:var(--dim2);margin:9px 2px 0}
+.legend b{color:var(--dim);font-weight:700}
+.banner{
+  margin-top:10px;padding:11px 13px;font-size:13px;color:var(--dim);
+  background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--acc);
+  border-radius:10px;
+}
+.banner b{color:var(--text);font-weight:650}
+
 /* ---------- day tabs ---------- */
 .days{display:flex;gap:8px;margin:18px 0 4px;overflow-x:auto;scrollbar-width:none}
 .days::-webkit-scrollbar{display:none}
@@ -202,6 +227,7 @@ footer{margin:34px 0 10px;font-size:12px;color:var(--dim2);text-align:center}
 
   <!-- ============ GYM ============ -->
   <section id="v-gym">
+    <div id="week"></div>
     <div class="days" id="days" role="tablist"></div>
     <div id="plan"></div>
   </section>
@@ -354,20 +380,34 @@ const PLAN = {
 
 const WARMUP = {
   items:[
-    {n:'Bike or incline walk', m:'', s:'3 min, easy'},
-    {n:'Band pull-apart', m:'', s:'2 × 15'},
-    {n:'Arm circles + shoulder dislocates', m:'', s:'1 × 10 each'},
-    {n:'Bodyweight squat', m:'', s:'1 × 15'},
-    {n:'Ramp-up sets on the first lift', m:'', s:'40% × 8, 60% × 5, 80% × 3'}
+    {n:'Treadmill incline walk', s:'4 min · 5.0 km/h · 8% incline',
+     alt:'Warm and breathing a bit heavier, not sweating. On a bike instead: 4 min, resistance 5, ~70 rpm.'},
+    {n:'Ramp-up sets on the first lift', s:'Bar × 10 → 50% × 5 → 75% × 3',
+     alt:'60s between them, all well short of failure. Working at 60 kg? That\'s 20 × 10, 30 × 5, 45 × 3. These aren\'t working sets — don\'t tire yourself out.'}
   ]
 };
+
+/* Mon / Wed / Sat — 48h between sessions. 0 = Sunday. */
+const SCHEDULE = {1:'A', 3:'B', 6:'C'};
+const WALK = [4, 0];                        // optional walk: Thu, Sun
+const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const DOWFULL = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+function nextTrainingDay(){
+  const t = new Date().getDay();
+  for(let i = 1; i <= 7; i++){
+    const d = (t + i) % 7;
+    if(SCHEDULE[d]) return {k:SCHEDULE[d], d:d};
+  }
+  return {k:'A', d:1};
+}
 
 const RULES = [
   ['Leave 1–2 reps in the tank','On compounds. Last set of the isolation work only, take it to the point where the next rep would fail.'],
   ['Double progression','Hit the <span class="k">top</span> of the rep range on every set → add 2.5 kg next time (1–2 kg on the small stuff). That\'s the whole method.'],
   ['Rest the full time','The rest numbers aren\'t suggestions. Cutting 3 minutes to 1 costs you reps, and reps are the point.'],
-  ['48 hours between sessions','Mon / Wed / Sat, or Tue / Thu / Sun. Never two days back to back.'],
-  ['Only doing 2 days?','Run <b>A</b> and <b>B</b> on repeat and add <b>Seated Dumbbell Shoulder Press 3 × 8–10</b> to Day A. Everything still gets hit — Day C is the bonus, not the base.'],
+  ['Monday, Wednesday, Saturday','Never two sessions back to back. The gap isn\'t time off — it\'s when the muscle is actually built. Missed Monday? Push the whole week back a day, don\'t double up.'],
+  ['Only doing 2 days?','<b>Monday and Thursday</b> — run A then B, same two every week. Add <b>Seated Dumbbell Shoulder Press 3 × 8–10</b> to Day A. Everything still gets hit; Day C is the bonus, not the base.'],
   ['No curls, by design','Every arm movement here is a hammer or neutral grip — brachialis and forearm, no supinated elbow flexion. Hammer curls build a thicker-looking arm anyway.'],
   ['No deadlifts, by design','Hamstrings and glutes are covered by leg curls and split squats, with a fraction of the recovery cost. Nothing is missing.'],
   ['Deload every 8–10 weeks','One week at half the sets, same weights. You\'ll come back stronger. Skipping this is how people stall for months.']
@@ -375,7 +415,7 @@ const RULES = [
 
 /* ------------------------------------------------------------------ state */
 const KEY = 'gym:v2';
-let day = 'A';
+let day = SCHEDULE[new Date().getDay()] || nextTrainingDay().k;
 let done = load();
 
 function today(){ return new Date().toISOString().slice(0,10); }
@@ -410,7 +450,32 @@ function exRow(it, id){
 
 function fmt(s){ const m = Math.floor(s/60), r = s%60; return m ? (r ? m+':'+String(r).padStart(2,'0') : m+' min') : s+'s'; }
 
+function weekBar(){
+  const t = new Date().getDay();
+  const cells = [1,2,3,4,5,6,0].map(d => {
+    const k = SCHEDULE[d];
+    const mark = k ? k : (WALK.includes(d) ? '•' : '–');
+    return `<div class="wd${d===t?' now':''}${k?' on':''}"><span>${DOW[d]}</span><b>${mark}</b></div>`;
+  }).join('');
+
+  const mine = SCHEDULE[t];
+  const nx = nextTrainingDay();
+  const msg = mine
+    ? `<b>Today is ${PLAN[mine].name}</b> — ${PLAN[mine].focus.replace('&amp;','&').toLowerCase()}. Loaded below.`
+    : (WALK.includes(t)
+        ? `<b>No gym today.</b> Optional 30–40 min walk. Next up is ${PLAN[nx.k].name} on ${DOWFULL[nx.d]}.`
+        : `<b>Rest day.</b> Next up is ${PLAN[nx.k].name} on ${DOWFULL[nx.d]}.`);
+
+  return `<div class="sec" style="margin-top:18px">
+      <div class="sec-h">Your week <em>48 h between sessions</em></div>
+      <div class="week">${cells}</div>
+      <div class="legend"><b>A B C</b> gym &nbsp;·&nbsp; <b>•</b> optional walk &nbsp;·&nbsp; <b>–</b> rest</div>
+      <div class="banner">${msg}</div>
+    </div>`;
+}
+
 function render(){
+  document.getElementById('week').innerHTML = weekBar();
   document.getElementById('days').innerHTML = Object.keys(PLAN).map(k =>
     `<button class="day" role="tab" aria-selected="${k===day}" onclick="pick('${k}')">
        <b>${PLAN[k].name}</b><i>${PLAN[k].focus}</i>
@@ -419,9 +484,9 @@ function render(){
   const p = PLAN[day];
   let h = '';
 
-  h += `<div class="sec"><div class="sec-h">Warm-up <em>every session, ~8 min</em></div><div class="card">`;
+  h += `<div class="sec"><div class="sec-h">Warm-up <em>every session, ~6 min</em></div><div class="card">`;
   h += WARMUP.items.map((it,i) => exRow(it, 'W'+i)).join('');
-  h += `</div></div>`;
+  h += `</div><p class="note">That's the whole warm-up. Stretching beforehand doesn't prevent injury and makes you weaker for the first sets — the ramp-up sets are the real preparation.</p></div>`;
 
   h += `<div class="sec"><div class="sec-h">${p.name} <em>${p.focus.replace('&amp;','&')} · in order</em></div>`;
   h += p.items.map((it,i) => {
