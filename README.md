@@ -1,13 +1,34 @@
 # karmidd.github.io
 
-Personal training page — gym schedule and diet targets.
+Personal pages. Plain static HTML, no dependencies and no build step.
 
-Single static `index.html`, no dependencies, no build step. Served at
-<https://karmidd.github.io>.
+| Path | What it is |
+| --- | --- |
+| [`/`](https://karmidd.github.io) | Index linking to everything below |
+| [`/training/`](https://karmidd.github.io/training/) | Gym schedule and diet targets |
 
-- **Gym** — 3 full-body days (run 2 if that's the week you have), with sets,
-  reps, rest times and a warm-up. Tap a rest chip to start a countdown timer.
-- **Diet** — calorie and protein targets, the weekly adjustment rule, and one
-  smoothie that covers most of both.
+## Adding a new page
 
-Checkmarks are stored in `localStorage` and clear themselves each day.
+Make a folder with an `index.html` in it and push. The folder name becomes the
+URL:
+
+```
+mkdir notes && $EDITOR notes/index.html    # → karmidd.github.io/notes/
+```
+
+Then add a card to the root `index.html` pointing at `/notes/` so it's reachable
+from the front page.
+
+## The other option: a separate repo
+
+Any repo of yours can publish its own page at `karmidd.github.io/<repo-name>` —
+create the repo, then turn on Settings → Pages → Deploy from a branch. Worth it
+when a project has its own code and history. For small standalone pages, a
+folder in this repo is less work: one repo, one deploy, live in about a minute.
+
+## Notes
+
+- `.nojekyll` skips Jekyll processing, so files are served exactly as committed.
+- Pages deploys from the default branch on every push; a build takes ~1 minute.
+- The training page stores checked-off exercises in `localStorage`. It's
+  per-device, and clears itself each day.
