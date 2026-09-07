@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0d10">
+<meta name="color-scheme" content="dark">
 <meta name="robots" content="noindex">
 <meta name="description" content="Gym schedule and diet targets">
 <link rel="icon" href="/training/favicon.svg" type="image/svg+xml">
@@ -22,9 +23,10 @@
   --acc-dim:#3d4f26;
   --warn:#f0b44a;
   --radius:14px;
+  color-scheme:dark;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;background:var(--bg)}
 body{
   margin:0;
   background:var(--bg);
@@ -32,7 +34,7 @@ body{
   font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   padding-bottom:calc(84px + env(safe-area-inset-bottom));
 }
-.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
 
 /* ---------- header ---------- */
 header{
@@ -42,7 +44,7 @@ header{
   border-bottom:1px solid var(--line);
 }
 .head-in{
-  max-width:720px;margin:0 auto;padding:14px 16px 12px;
+  max-width:1180px;margin:0 auto;padding:14px 16px 12px;
   display:flex;align-items:center;gap:12px;flex-wrap:wrap;
 }
 h1{
@@ -110,7 +112,7 @@ h1 span{width:7px;height:7px;border-radius:50%;background:var(--acc);flex:none}
 .sec-h em{font-style:normal;color:var(--dim);letter-spacing:0;text-transform:none;font-weight:500;font-size:12px}
 
 .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-.card + .card{margin-top:8px}
+.exlist{display:grid;gap:9px}
 .ss{border-color:#2c3a44;background:var(--panel2)}
 .ss-tag{
   font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--acc);
@@ -208,6 +210,21 @@ tfoot td{background:var(--panel2);color:var(--text);font-weight:650;border-top:1
 
 footer{margin:34px 0 10px;font-size:12px;color:var(--dim2);text-align:center}
 .hide{display:none}
+/* ---------- desktop layout ---------- */
+.layout{display:block}
+@media (min-width:980px){
+  .wrap{padding:0 24px}
+  .layout{display:grid;grid-template-columns:322px minmax(0,1fr);gap:28px;align-items:start}
+  .side{position:sticky;top:72px}
+  .side .days{flex-direction:column;margin-top:14px}
+  .side .day{min-width:0}
+  .side .sec{margin-top:0}
+  .exlist{display:block;column-count:2;column-gap:10px}
+  .exlist > .card{break-inside:avoid;margin:0 0 10px}
+  .cols,.dietgrid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+  .dcol > .sec:first-child{margin-top:0}
+}
+
 @media (max-width:420px){
   .stats{grid-template-columns:1fr}
   .day{min-width:96px}
@@ -229,83 +246,86 @@ footer{margin:34px 0 10px;font-size:12px;color:var(--dim2);text-align:center}
 <main class="wrap">
 
   <!-- ============ GYM ============ -->
-  <section id="v-gym">
-    <div id="week"></div>
-    <div class="days" id="days" role="tablist"></div>
-    <div id="plan"></div>
-  </section>
+  <section id="v-gym"></section>
 
   <!-- ============ DIET ============ -->
   <section id="v-diet" class="hide">
-
-    <div class="sec" style="margin-top:18px">
-      <div class="sec-h">Daily targets <em>60 kg &middot; lean gain</em></div>
-      <div class="stats">
-        <div class="stat">
-          <div class="n">2,700<small> kcal</small></div>
-          <div class="l">Calories</div>
-          <div class="s">~350 over maintenance. Hit it every day, training or not.</div>
+    <div class="dietgrid">
+      <div class="dcol">
+      <div class="sec" style="margin-top:18px">
+        <div class="sec-h">Daily targets <em>60 kg &middot; lean gain</em></div>
+        <div class="stats">
+          <div class="stat">
+            <div class="n">2,700<small> kcal</small></div>
+            <div class="l">Calories</div>
+            <div class="s">~350 over maintenance. Hit it every day, training or not.</div>
+          </div>
+          <div class="stat">
+            <div class="n">120<small> g</small></div>
+            <div class="l">Protein</div>
+            <div class="s">2 g per kg. This is the only macro worth counting.</div>
+          </div>
         </div>
-        <div class="stat">
-          <div class="n">120<small> g</small></div>
-          <div class="l">Protein</div>
-          <div class="s">2 g per kg. This is the only macro worth counting.</div>
+        <p class="note">Fat: keep it above <b>55 g</b> so hormones stay fine. Everything left over is carbs &mdash; don't track them, they'll happen on their own.</p>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h">The feedback loop <em>the only thing that proves it's working</em></div>
+        <div class="list">
+          <div><b>Weigh 3&ndash;4 mornings a week.</b> After the bathroom, before food. Use the <span class="k">weekly average</span>, never a single day.</div>
+          <div><b>Target: +0.3 kg per week.</b> Roughly 1.3 kg a month. Slow is correct &mdash; faster than this is mostly fat.</div>
+          <div><b>Average flat for 2 weeks?</b> Add <span class="k">+250 kcal</span> per day and re-check. Repeat until it moves.</div>
+          <div><b>Gaining over 0.5 kg/week?</b> Drop <span class="k">200 kcal</span>. You're outrunning what your body can build.</div>
+          <div><b>Scale stuck but lifts going up?</b> Keep going, don't touch anything. Weight follows strength.</div>
         </div>
       </div>
-      <p class="note">Fat: keep it above <b>55 g</b> so hormones stay fine. Everything left over is carbs &mdash; don't track them, they'll happen on their own.</p>
-    </div>
 
-    <div class="sec">
-      <div class="sec-h">The feedback loop <em>the only thing that proves it's working</em></div>
-      <div class="list">
-        <div><b>Weigh 3&ndash;4 mornings a week.</b> After the bathroom, before food. Use the <span class="k">weekly average</span>, never a single day.</div>
-        <div><b>Target: +0.3 kg per week.</b> Roughly 1.3 kg a month. Slow is correct &mdash; faster than this is mostly fat.</div>
-        <div><b>Average flat for 2 weeks?</b> Add <span class="k">+250 kcal</span> per day and re-check. Repeat until it moves.</div>
-        <div><b>Gaining over 0.5 kg/week?</b> Drop <span class="k">200 kcal</span>. You're outrunning what your body can build.</div>
-        <div><b>Scale stuck but lifts going up?</b> Keep going, don't touch anything. Weight follows strength.</div>
+      <div class="sec">
+        <div class="sec-h">Supplements <em>two worth buying</em></div>
+        <div class="list">
+          <div><b>Whey protein concentrate</b> &mdash; ~24 g protein and ~120 kcal a scoop, drinkable when you can't be bothered to eat. <b>Concentrate over isolate even with money to spare:</b> isolate is just concentrate with the carbs and fat filtered out, and those are calories you're actively chasing. Same muscle, less of what you need. Only switch if lactose upsets your stomach.</div>
+          <div><b>Creatine monohydrate, 5 g/day</b> &mdash; the only other supplement with real evidence behind it. More reps per set, a couple of kg on the scale within a month. No loading phase, timing doesn't matter, take it on rest days too.</div>
+          <div><b>Mass gainers &mdash; no, and not because of the price.</b> A serving is mostly maltodextrin: a very fast carb that spikes blood sugar, upsets a lot of stomachs at a full scoop, and flattens your appetite for the next real meal. The smoothie below hits the same calories from oats, milk and peanut butter, which digest slower and carry actual nutrients. Keep a tub for travel if you want; don't build the plan on it.</div>
+          <div><b>Nothing else is worth buying.</b> Not BCAAs, not glutamine, not test boosters. Past food and creatine, money stops buying muscle &mdash; if you have budget spare, spend it on a second smoothie a day.</div>
+        </div>
+      </div>
+
+      </div>
+      <div class="dcol">
+      <div class="sec">
+        <div class="sec-h">The anchor smoothie <em>blend 60s &middot; once a day</em></div>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Ingredient</th><th class="r">Amount</th><th class="r">kcal</th><th class="r">Protein</th></tr></thead>
+            <tbody>
+              <tr><td>Whole milk</td><td class="r">400 ml</td><td class="r">260</td><td class="r">13 g</td></tr>
+              <tr><td>Whey protein</td><td class="r">2 scoops</td><td class="r">240</td><td class="r">48 g</td></tr>
+              <tr><td>Rolled oats</td><td class="r">60 g</td><td class="r">235</td><td class="r">8 g</td></tr>
+              <tr><td>Peanut butter</td><td class="r">30 g</td><td class="r">175</td><td class="r">8 g</td></tr>
+              <tr><td>Banana</td><td class="r">1 medium</td><td class="r">105</td><td class="r">1 g</td></tr>
+              <tr class="opt"><td>Honey <em>(optional)</em></td><td class="r">1 tbsp</td><td class="r">65</td><td class="r">&mdash;</td></tr>
+            </tbody>
+            <tfoot><tr><td>Total</td><td class="r"></td><td class="r">1,080</td><td class="r">78 g</td></tr></tfoot>
+          </table>
+        </div>
+        <p class="note">That one glass is <b>40% of your calories and 65% of your protein</b>. Which is the whole point &mdash; whatever you eat the rest of the day, you're already close, and inconsistent food stops mattering. Too much to drink at once? Split it in half and have the second half later.</p>
+        <p class="note">Blend the oats first if your blender is weak. Drinking it after training is ideal but not important &mdash; getting it in every day is.</p>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h">If you're still not gaining</div>
+        <div class="list">
+          <div>The problem is never metabolism. It's that you <b>ate less than you think</b>. Track one honest day &mdash; weigh everything &mdash; and you'll find the gap.</div>
+          <div>Drink calories instead of chewing them. A second smoothie is easier than a second meal.</div>
+          <div>Add fat to what you already eat: olive oil on rice, extra peanut butter, full-fat milk over skimmed. 300 kcal with no extra volume in your stomach.</div>
+        </div>
+      </div>
+
+  
       </div>
     </div>
 
-    <div class="sec">
-      <div class="sec-h">Supplements <em>two worth buying</em></div>
-      <div class="list">
-        <div><b>Whey protein concentrate</b> &mdash; ~24 g protein and ~120 kcal a scoop, drinkable when you can't be bothered to eat. <b>Concentrate over isolate even with money to spare:</b> isolate is just concentrate with the carbs and fat filtered out, and those are calories you're actively chasing. Same muscle, less of what you need. Only switch if lactose upsets your stomach.</div>
-        <div><b>Creatine monohydrate, 5 g/day</b> &mdash; the only other supplement with real evidence behind it. More reps per set, a couple of kg on the scale within a month. No loading phase, timing doesn't matter, take it on rest days too.</div>
-        <div><b>Mass gainers &mdash; no, and not because of the price.</b> A serving is mostly maltodextrin: a very fast carb that spikes blood sugar, upsets a lot of stomachs at a full scoop, and flattens your appetite for the next real meal. The smoothie below hits the same calories from oats, milk and peanut butter, which digest slower and carry actual nutrients. Keep a tub for travel if you want; don't build the plan on it.</div>
-        <div><b>Nothing else is worth buying.</b> Not BCAAs, not glutamine, not test boosters. Past food and creatine, money stops buying muscle &mdash; if you have budget spare, spend it on a second smoothie a day.</div>
-      </div>
-    </div>
-
-    <div class="sec">
-      <div class="sec-h">The anchor smoothie <em>blend 60s &middot; once a day</em></div>
-      <div class="tbl">
-        <table>
-          <thead><tr><th>Ingredient</th><th class="r">Amount</th><th class="r">kcal</th><th class="r">Protein</th></tr></thead>
-          <tbody>
-            <tr><td>Whole milk</td><td class="r">400 ml</td><td class="r">260</td><td class="r">13 g</td></tr>
-            <tr><td>Whey protein</td><td class="r">2 scoops</td><td class="r">240</td><td class="r">48 g</td></tr>
-            <tr><td>Rolled oats</td><td class="r">60 g</td><td class="r">235</td><td class="r">8 g</td></tr>
-            <tr><td>Peanut butter</td><td class="r">30 g</td><td class="r">175</td><td class="r">8 g</td></tr>
-            <tr><td>Banana</td><td class="r">1 medium</td><td class="r">105</td><td class="r">1 g</td></tr>
-            <tr class="opt"><td>Honey <em>(optional)</em></td><td class="r">1 tbsp</td><td class="r">65</td><td class="r">&mdash;</td></tr>
-          </tbody>
-          <tfoot><tr><td>Total</td><td class="r"></td><td class="r">1,080</td><td class="r">78 g</td></tr></tfoot>
-        </table>
-      </div>
-      <p class="note">That one glass is <b>40% of your calories and 65% of your protein</b>. Which is the whole point &mdash; whatever you eat the rest of the day, you're already close, and inconsistent food stops mattering. Too much to drink at once? Split it in half and have the second half later.</p>
-      <p class="note">Blend the oats first if your blender is weak. Drinking it after training is ideal but not important &mdash; getting it in every day is.</p>
-    </div>
-
-    <div class="sec">
-      <div class="sec-h">If you're still not gaining</div>
-      <div class="list">
-        <div>The problem is never metabolism. It's that you <b>ate less than you think</b>. Track one honest day &mdash; weigh everything &mdash; and you'll find the gap.</div>
-        <div>Drink calories instead of chewing them. A second smoothie is easier than a second meal.</div>
-        <div>Add fat to what you already eat: olive oil on rice, extra peanut butter, full-fat milk over skimmed. 300 kcal with no extra volume in your stomach.</div>
-      </div>
-    </div>
-
-  </section>
+</section>
 
   <footer>Progress is a spreadsheet, not a feeling. Log your lifts.</footer>
 </main>
@@ -479,43 +499,49 @@ function weekBar(){
 }
 
 function render(){
-  document.getElementById('week').innerHTML = weekBar();
-  document.getElementById('days').innerHTML = Object.keys(PLAN).map(k =>
+  const p = PLAN[day];
+
+  const tabs = Object.keys(PLAN).map(k =>
     `<button class="day" role="tab" aria-selected="${k===day}" onclick="pick('${k}')">
        <b>${PLAN[k].name}</b><i>${PLAN[k].focus}</i>
      </button>`).join('');
 
-  const p = PLAN[day];
-  let h = '';
+  const side = `${weekBar()}<div class="days" role="tablist">${tabs}</div>`;
 
-  h += `<div class="sec"><div class="sec-h">Warm-up <em>every session, ~6 min</em></div><div class="card">`;
-  h += WARMUP.items.map((it,i) => exRow(it, 'W'+i)).join('');
-  h += `</div><p class="note">That's the whole warm-up. Stretching beforehand doesn't prevent injury and makes you weaker for the first sets — the ramp-up sets are the real preparation.</p></div>`;
+  const warm = `<div class="sec"><div class="sec-h">Warm-up <em>every session, ~6 min</em></div><div class="card">`
+    + WARMUP.items.map((it,i) => exRow(it, 'W'+i)).join('')
+    + `</div><p class="note">That's the whole warm-up. Stretching beforehand doesn't prevent injury and makes you weaker for the first sets &mdash; the ramp-up sets are the real preparation.</p></div>`;
 
-  h += `<div class="sec"><div class="sec-h">${p.name} <em>${p.focus.replace('&amp;','&')} · in order</em></div>`;
-  h += p.items.map((it,i) => {
+  const list = p.items.map((it,i) => {
     if(it.ss){
-      return `<div class="card ss"><div class="ss-tag">Superset — alternate, ${fmt(it.r)} after each round</div>`
+      return `<div class="card ss"><div class="ss-tag">Superset &mdash; alternate, ${fmt(it.r)} after each round</div>`
         + it.ss.map((x,j) => exRow(x, day+i+'-'+j)).join('')
         + `<div class="ex" style="padding-top:0"><div style="flex:1"></div>
-             <button class="pill rest" onclick="startTimer(${it.r},'Superset')">⏱ ${fmt(it.r)} rest</button></div>`
+             <button class="pill rest" onclick="startTimer(${it.r},'Superset')">&#9201; ${fmt(it.r)} rest</button></div>`
         + `</div>`;
     }
     return `<div class="card">${exRow(it, day+i)}</div>`;
   }).join('');
-  h += `</div>`;
 
-  h += `<div class="sec"><div class="sec-h">Cardio finisher <em>after lifting, not before</em></div>
+  const ex = `<div class="sec"><div class="sec-h">${p.name} <em>${p.focus.replace('&amp;','&')} &middot; in order</em></div>`
+    + `<div class="exlist">${list}</div></div>`;
+
+  const fin = `<div class="sec"><div class="sec-h">Cardio finisher <em>after lifting, not before</em></div>
         <div class="fin"><b>${p.fin.t}</b><p>${p.fin.d}</p></div></div>`;
 
-  h += `<div class="sec"><div class="sec-h">Extra cardio <em>optional, off days</em></div>
-        <div class="list"><div>A <b>30–40 minute brisk walk</b> on a non-gym day. Costs you nothing in recovery, builds the aerobic base that makes every session easier. Your resting heart rate should drop noticeably in 6–8 weeks — that's the number to watch.</div></div></div>`;
+  const extra = `<div class="sec"><div class="sec-h">Extra cardio <em>optional, off days</em></div>
+        <div class="list"><div>A <b>30&ndash;40 minute brisk walk</b> on a non-gym day. Costs you nothing in recovery, builds the aerobic base that makes every session easier. Your resting heart rate should drop noticeably in 6&ndash;8 weeks &mdash; that's the number to watch.</div></div></div>`;
 
-  h += `<div class="sec"><div class="sec-h">Rules</div><div class="list">`
-    + RULES.map(r => `<div><b>${r[0]}</b> — ${r[1]}</div>`).join('')
+  const rules = `<div class="sec"><div class="sec-h">Rules</div><div class="list">`
+    + RULES.map(r => `<div><b>${r[0]}</b> &mdash; ${r[1]}</div>`).join('')
     + `</div></div>`;
 
-  document.getElementById('plan').innerHTML = h;
+  document.getElementById('v-gym').innerHTML =
+      `<div class="layout">
+         <aside class="side">${side}</aside>
+         <div class="main">${warm}${ex}${fin}</div>
+       </div>
+       <div class="cols">${extra}${rules}</div>`;
 }
 
 function pick(k){ day = k; render(); window.scrollTo({top:0,behavior:'smooth'}); }
