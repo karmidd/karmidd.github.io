@@ -1,30 +1,40 @@
 # karmidd.github.io
 
-Personal pages. Plain static HTML, no dependencies and no build step.
+Personal pages. Plain static HTML, no dependencies and no build step for the
+pages themselves.
 
-| Path | What it is |
-| --- | --- |
-| [`/`](https://karmidd.github.io) | Index linking to everything below |
-| [`/training/`](https://karmidd.github.io/training/) | Gym schedule and diet targets |
+The root, <https://karmidd.github.io>, is a directory listing every page on the
+site. It is **generated** — `index.html` is written by `build-index.js` and
+overwritten on every push, so don't edit it by hand.
 
-## Adding a new page
+## Adding a page
 
-Make a folder with an `index.html` in it and push. The folder name becomes the
-URL:
+Make a folder with an `index.html` and push:
 
 ```
 mkdir notes && $EDITOR notes/index.html    # → karmidd.github.io/notes/
 ```
 
-Then add a card to the root `index.html` pointing at `/notes/` so it's reachable
-from the front page.
+That's the whole process. CI regenerates the root directory, so the new page
+shows up at `/` on its own. Give each page a `<title>` and a description — the
+directory reads its rows from them:
+
+```html
+<title>Notes</title>
+<meta name="description" content="What the page is, in one line">
+```
+
+The description is the text shown next to the path; without one the directory
+falls back to the title.
+
+To preview the directory locally, run `node build-index.js`.
 
 ## The other option: a separate repo
 
 Any repo of yours can publish its own page at `karmidd.github.io/<repo-name>` —
-create the repo, then turn on Settings → Pages → Deploy from a branch. Worth it
-when a project has its own code and history. For small standalone pages, a
-folder in this repo is less work: one repo, one deploy, live in about a minute.
+create it, then turn on Settings → Pages → Deploy from a branch. Worth it when a
+project has its own code and history. For small standalone pages, a folder here
+is less work, and it gets listed in the directory automatically.
 
 ## Notes
 

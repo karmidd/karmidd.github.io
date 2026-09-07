@@ -1,4 +1,47 @@
-<!doctype html>
+#!/usr/bin/env node
+/*
+ * Regenerates the root index.html.
+ *
+ * Every top-level folder holding an index.html becomes a row. The row's text
+ * comes from that page's own <title> and <meta name="description">, so adding a
+ * page to the site is the only step — nothing here needs editing.
+ *
+ * Run with `node build-index.js`. CI runs it on every push (.github/workflows).
+ */
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = __dirname;
+const SKIP = new Set(['node_modules', '.github', '.git']);
+
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+const tagOf = (html, re) => {
+  const m = html.match(re);
+  return m ? m[1].trim() : '';
+};
+
+const pages = fs.readdirSync(ROOT, { withFileTypes: true })
+  .filter(d => d.isDirectory() && !d.name.startsWith('.') && !SKIP.has(d.name))
+  .filter(d => fs.existsSync(path.join(ROOT, d.name, 'index.html')))
+  .map(d => {
+    const html = fs.readFileSync(path.join(ROOT, d.name, 'index.html'), 'utf8');
+    return {
+      slug: d.name,
+      title: tagOf(html, /<title>([^<]*)<\/title>/i) || d.name,
+      desc: tagOf(html, /<meta\s+name=["']description["']\s+content=["']([^"']*)["']/i)
+    };
+  })
+  .sort((a, b) => a.slug.localeCompare(b.slug));
+
+const rows = pages.length
+  ? pages.map(p => `      <a class="row" href="/${p.slug}/">
+        <code>/${esc(p.slug)}/</code>
+        <span>${esc(p.desc || p.title)}</span>
+      </a>`).join('\n')
+  : `      <p class="empty">No pages yet. Add a folder with an index.html.</p>`;
+
+const out = `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -43,13 +86,14 @@ a.row span{font-size:13.5px;color:var(--dim);flex:1;min-width:0}
 <body>
   <div class="wrap">
     <h1><span></span>karmidd.github.io</h1>
-    <p class="count">1 page</p>
+    <p class="count">${pages.length} page${pages.length === 1 ? '' : 's'}</p>
     <div class="list">
-      <a class="row" href="/training/">
-        <code>/training/</code>
-        <span>Gym schedule and diet targets</span>
-      </a>
+${rows}
     </div>
   </div>
 </body>
 </html>
+`;
+
+fs.writeFileSync(path.join(ROOT, 'index.html'), out);
+console.log(`index.html: ${pages.length} page(s) — ${pages.map(p => '/' + p.slug + '/').join(' ') || 'none'}`);
