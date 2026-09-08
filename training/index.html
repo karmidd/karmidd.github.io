@@ -356,7 +356,7 @@ const PLAN = {
       {n:'Rope Triceps Pushdown', m:'Triceps', s:'3 sets × 10–12', r:60, alt:'Elbows pinned to your sides, spread the rope at the bottom'},
       {n:'Cable Rope Hammer Curl', m:'Biceps · Brachialis · Forearm', s:'3 sets × 10–12', r:60, alt:'Neutral grip the whole way — thumbs up, palms facing each other'}
     ],
-    fin:{t:'Zone 2 — 12 minutes', d:'Incline treadmill walk or bike. Hard enough that talking is annoying, easy enough that you could. This is the part that actually builds cardio.'}
+    fin:{t:'Easy cardio — 12 minutes', d:'Treadmill at 5.5 km/h on a 6% incline, or steady pedalling on a bike. How hard: you can say a full sentence out loud, but you would not want to hold a conversation. If you could sing, speed up. If you can only get two or three words out, slow down.'}
   },
   B: {
     name: 'Day B', focus: 'Back &amp; hamstrings',
@@ -371,7 +371,7 @@ const PLAN = {
       {n:'Cable Rope Hammer Curl', m:'Brachialis · Forearm', s:'3 sets × 12', r:60, alt:'Neutral grip — thumbs up throughout'},
       {n:'Calf Raise Machine', m:'Calves', s:'3 sets × 15–20', r:60, alt:''}
     ],
-    fin:{t:'Intervals — 8 × (30s hard / 90s easy)', d:'Bike or rower, 16 minutes total. The hard 30s should be genuinely hard. One session like this a week does more for your cardio than three easy ones.'}
+    fin:{t:'Intervals — 16 minutes', d:'On a bike: 30 seconds pedalling as hard as you can keep up, then 90 seconds slow and easy. That is one round. Do 8 rounds. By the end of each hard 30 seconds you should not be able to speak at all — that is the point. One session like this a week beats three easy ones.'}
   },
   C: {
     name: 'Day C', focus: 'Shoulders &amp; arms',
@@ -386,7 +386,7 @@ const PLAN = {
       {n:'Ab Crunch Machine', m:'Upper abs', s:'3 sets × 12–15', r:60, alt:''},
       {n:'Captain\'s Chair Leg Raise', m:'Lower abs', s:'3 sets × 10–15', r:60, alt:'Knees up if straight legs are too hard'}
     ],
-    fin:{t:'Zone 2 — 12 minutes', d:'Same as Day A. Steady, boring, effective. Never do this before you lift.'}
+    fin:{t:'Easy cardio — 12 minutes', d:'Same as Day A — 5.5 km/h at 6% incline, or steady on the bike. Full sentence yes, conversation no. Do it after lifting, never before.'}
   }
 };
 
@@ -417,14 +417,14 @@ function nextTrainingDay(){
 const RULES = [
   ['One machine at a time','No supersets, nothing to pair up, nothing that needs two machines free at once. Work down the list one machine at a time. If one is taken, skip it and come back.'],
   ['Machines on purpose','Every lift is a machine or a cable: sit down, set one pin, go. No spotter, no bar to load, no balance to learn. You lose nothing that matters for how you look, and you get to push the last set to failure safely.'],
-  ['Leave 1–2 reps in the tank','On compounds. Last set of the isolation work only, take it to the point where the next rep would fail.'],
-  ['Double progression','Hit the <span class="k">top</span> of the rep range on every set → move the pin down one plate next time. If a full plate is too big a jump, add reps instead until it isn\'t. That\'s the whole method.'],
+  ['How hard to push each set','On the big machines (leg press, chest press, pulldown, hack squat), stop when you could still manage one or two more reps. On the small stuff (raises, pushdowns, curls, calves), take the <span class="k">last</span> set until you genuinely cannot complete another rep.'],
+  ['When to add weight','Once you hit the <span class="k">top</span> number of the rep range on every set — say all 3 sets at 15 reps when it says 12–15 — move the pin down one plate next time. You will drop back toward 12 reps at the heavier weight. Build back up, repeat. That is the whole method.'],
   ['Rest the full time','The rest numbers aren\'t suggestions. Cutting 3 minutes to 1 costs you reps, and reps are the point.'],
   ['Monday, Wednesday, Saturday','Never two sessions back to back. The gap isn\'t time off — it\'s when the muscle is actually built. Missed Monday? Push the whole week back a day, don\'t double up.'],
   ['Only doing 2 days?','<b>Monday and Thursday</b> — run A then B, same two every week. Add <b>Shoulder Press Machine 3 × 8–10</b> to Day A. Everything still gets hit; Day C is the bonus, not the base.'],
   ['No curls, by design','Every arm movement is a rope hammer curl — neutral grip, brachialis and forearm, no supinated elbow flexion. It builds a thicker-looking arm anyway.'],
   ['No deadlifts, by design','Hamstrings and glutes are covered by the leg curls, leg press and hack squat, at a fraction of the recovery cost. Nothing is missing.'],
-  ['Deload every 8–10 weeks','One week at half the sets, same weights. You\'ll come back stronger. Skipping this is how people stall for months.']
+  ['Take an easy week every 8–10 weeks','Same weights, half the sets, for one week. It feels like going backwards and it is not — you come back stronger. Skipping these is how people stall for months.']
 ];
 
 /* ------------------------------------------------------------------ state */
@@ -509,11 +509,11 @@ function render(){
     + `<p class="note"><b>How to read this:</b> &ldquo;3 sets &times; 12&ndash;15&rdquo; means do 12&ndash;15 reps, rest the listed time, and repeat until you've done 3 sets &mdash; all on that one machine. Then move to the next.</p>`
     + `<p class="note">If a machine is busy, skip it and come back at the end. Getting the sets in matters, the order doesn't.</p></div>`;
 
-  const fin = `<div class="sec"><div class="sec-h">Cardio finisher <em>after lifting, not before</em></div>
+  const fin = `<div class="sec"><div class="sec-h">Cardio <em>at the end of the session, never before</em></div>
         <div class="fin"><b>${p.fin.t}</b><p>${p.fin.d}</p></div></div>`;
 
   const extra = `<div class="sec"><div class="sec-h">Extra cardio <em>optional, off days</em></div>
-        <div class="list"><div>A <b>30&ndash;40 minute brisk walk</b> on a non-gym day. Costs you nothing in recovery, builds the aerobic base that makes every session easier. Your resting heart rate should drop noticeably in 6&ndash;8 weeks &mdash; that's the number to watch.</div></div></div>`;
+        <div class="list"><div>A <b>30&ndash;40 minute brisk walk</b> on a non-gym day. Costs you nothing in the gym and makes everything else feel easier &mdash; stairs, the last set, the next session. Check your resting pulse now and again in 6&ndash;8 weeks: it should be noticeably lower. That is the number that tells you your cardio improved.</div></div></div>`;
 
   const rules = `<div class="sec"><div class="sec-h">Rules</div><div class="list">`
     + RULES.map(r => `<div><b>${r[0]}</b> &mdash; ${r[1]}</div>`).join('')
