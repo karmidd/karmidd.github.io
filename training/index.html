@@ -515,7 +515,7 @@ function render(){
 
   const list = p.items.map((it,i) => {
     if(it.ss){
-      return `<div class="card ss"><div class="ss-tag">Superset &mdash; alternate, ${fmt(it.r)} after each round</div>`
+      return `<div class="card ss"><div class="ss-tag">Superset &mdash; both back to back, then rest ${fmt(it.r)}</div>`
         + it.ss.map((x,j) => exRow(x, day+i+'-'+j)).join('')
         + `<div class="ex" style="padding-top:0"><div style="flex:1"></div>
              <button class="pill rest" onclick="startTimer(${it.r},'Superset')">&#9201; ${fmt(it.r)} rest</button></div>`
