@@ -347,56 +347,44 @@ const PLAN = {
   A: {
     name: 'Day A', focus: 'Chest &amp; quads',
     items: [
-      {n:'Leg Press', m:'Quads · Glutes', s:'3 × 10–12', r:150, alt:'Sit, set the seat once, go. Feet mid-platform, don\'t lock the knees out hard'},
-      {n:'Chest Press Machine', m:'Chest · Front delt · Triceps', s:'4 × 8–10', r:120, alt:'Handles level with your mid-chest. No spotter needed, so push the last set hard'},
-      {n:'Seated Row Machine', m:'Lats · Mid back', s:'4 × 10–12', r:120, alt:'Chest-supported. Pull to your stomach, let the shoulder blades come apart at the front'},
-      {n:'Pec Deck', m:'Chest — the stretch', s:'3 × 12–15', r:90, alt:'One pin, one seat height. Slow on the way out'},
-      {ss:[
-        {n:'Lateral Raise Machine', m:'Side delts — shoulder width', s:'3 × 12–15'},
-        {n:'Calf Raise Machine', m:'Calves', s:'3 × 12–15'}
-      ], r:60},
-      {ss:[
-        {n:'Rope Triceps Pushdown', m:'Triceps', s:'3 × 10–12'},
-        {n:'Cable Rope Hammer Curl', m:'Biceps · Brachialis · Forearm', s:'3 × 10–12'}
-      ], r:60}
+      {n:'Leg Press', m:'Quads · Glutes', s:'3 sets × 10–12', r:150, alt:'Sit, set the seat once, go. Feet mid-platform, don\'t lock the knees out hard'},
+      {n:'Chest Press Machine', m:'Chest · Front delt · Triceps', s:'4 sets × 8–10', r:120, alt:'Handles level with your mid-chest. No spotter needed, so push the last set hard'},
+      {n:'Seated Row Machine', m:'Lats · Mid back', s:'4 sets × 10–12', r:120, alt:'Chest-supported. Pull to your stomach, let the shoulder blades come apart at the front'},
+      {n:'Pec Deck', m:'Chest — the stretch', s:'3 sets × 12–15', r:90, alt:'One pin, one seat height. Slow on the way out'},
+      {n:'Lateral Raise Machine', m:'Side delts — shoulder width', s:'3 sets × 12–15', r:60, alt:'Light. Lead with the elbows, stop at shoulder height'},
+      {n:'Calf Raise Machine', m:'Calves', s:'3 sets × 12–15', r:60, alt:'Full stretch at the bottom, pause at the top'},
+      {n:'Rope Triceps Pushdown', m:'Triceps', s:'3 sets × 10–12', r:60, alt:'Elbows pinned to your sides, spread the rope at the bottom'},
+      {n:'Cable Rope Hammer Curl', m:'Biceps · Brachialis · Forearm', s:'3 sets × 10–12', r:60, alt:'Neutral grip the whole way — thumbs up, palms facing each other'}
     ],
     fin:{t:'Zone 2 — 12 minutes', d:'Incline treadmill walk or bike. Hard enough that talking is annoying, easy enough that you could. This is the part that actually builds cardio.'}
   },
   B: {
     name: 'Day B', focus: 'Back &amp; hamstrings',
     items: [
-      {n:'Lat Pulldown', m:'Lats — the V taper', s:'4 × 8–10', r:150, alt:'Wide-ish grip, pull to your collarbone, no leaning back'},
-      {n:'Incline Chest Press Machine', m:'Upper chest · Front delt', s:'4 × 8–10', r:120, alt:'If your gym has no incline machine, use the flat one and raise the seat a notch'},
-      {n:'Seated Leg Curl', m:'Hamstrings', s:'3 × 10–12', r:90, alt:'Seated beats lying — better stretch on the hamstring'},
-      {n:'Leg Extension', m:'Quads', s:'3 × 12–15', r:90, alt:'Pause a beat at the top. This is where the teardrop above the knee comes from'},
-      {ss:[
-        {n:'Reverse Pec Deck', m:'Rear delts · Posture', s:'3 × 15'},
-        {n:'Lateral Raise Machine', m:'Side delts', s:'3 × 12–15'}
-      ], r:60},
-      {ss:[
-        {n:'Rope Triceps Pushdown', m:'Triceps', s:'3 × 10–12'},
-        {n:'Cable Rope Hammer Curl', m:'Brachialis · Forearm', s:'3 × 12'}
-      ], r:60},
-      {n:'Calf Raise Machine', m:'Calves', s:'3 × 15–20', r:60, alt:''}
+      {n:'Lat Pulldown', m:'Lats — the V taper', s:'4 sets × 8–10', r:150, alt:'Wide-ish grip, pull to your collarbone, no leaning back'},
+      {n:'Incline Chest Press Machine', m:'Upper chest · Front delt', s:'4 sets × 8–10', r:120, alt:'No incline machine? Use the flat one and raise the seat a notch'},
+      {n:'Seated Leg Curl', m:'Hamstrings', s:'3 sets × 10–12', r:90, alt:'Seated beats lying — better stretch on the hamstring'},
+      {n:'Leg Extension', m:'Quads', s:'3 sets × 12–15', r:90, alt:'Pause a beat at the top. This is where the teardrop above the knee comes from'},
+      {n:'Reverse Pec Deck', m:'Rear delts · Posture', s:'3 sets × 15', r:60, alt:'Light. This is what stops the desk-hunch and keeps shoulders healthy'},
+      {n:'Lateral Raise Machine', m:'Side delts', s:'3 sets × 12–15', r:60, alt:''},
+      {n:'Rope Triceps Pushdown', m:'Triceps', s:'3 sets × 10–12', r:60, alt:''},
+      {n:'Cable Rope Hammer Curl', m:'Brachialis · Forearm', s:'3 sets × 12', r:60, alt:'Neutral grip — thumbs up throughout'},
+      {n:'Calf Raise Machine', m:'Calves', s:'3 sets × 15–20', r:60, alt:''}
     ],
     fin:{t:'Intervals — 8 × (30s hard / 90s easy)', d:'Bike or rower, 16 minutes total. The hard 30s should be genuinely hard. One session like this a week does more for your cardio than three easy ones.'}
   },
   C: {
     name: 'Day C', focus: 'Shoulders &amp; arms',
     items: [
-      {n:'Hack Squat Machine', m:'Quads · Glutes', s:'3 × 10–12', r:150, alt:'Or the leg press again if hack squat is taken — same job, zero setup'},
-      {n:'Shoulder Press Machine', m:'Front &amp; side delts', s:'4 × 8–10', r:120, alt:'Back against the pad so you press instead of leaning into it'},
-      {n:'Assisted Dip Machine', m:'Lower chest · Triceps', s:'3 × 8–12', r:120, alt:'Lean forward for chest. Set the assist so the last rep is a real fight'},
-      {n:'Seated Cable Row', m:'Lats · Mid back', s:'3 × 10–12', r:90, alt:'Neutral handle. Full stretch forward, no torso swing back'},
-      {n:'Lying Leg Curl', m:'Hamstrings', s:'3 × 10–12', r:90, alt:''},
-      {ss:[
-        {n:'Lateral Raise Machine', m:'Side delts — go light', s:'3 × 15–20'},
-        {n:'Cable Rope Hammer Curl', m:'Biceps · Brachialis', s:'3 × 10–12'}
-      ], r:60},
-      {ss:[
-        {n:'Ab Crunch Machine', m:'Upper abs', s:'3 × 12–15'},
-        {n:'Captain\'s Chair Leg Raise', m:'Lower abs', s:'3 × 10–15'}
-      ], r:60}
+      {n:'Hack Squat Machine', m:'Quads · Glutes', s:'3 sets × 10–12', r:150, alt:'Or the leg press again if it\'s taken — same job, zero setup'},
+      {n:'Shoulder Press Machine', m:'Front &amp; side delts', s:'4 sets × 8–10', r:120, alt:'Back against the pad so you press instead of leaning into it'},
+      {n:'Assisted Dip Machine', m:'Lower chest · Triceps', s:'3 sets × 8–12', r:120, alt:'Lean forward for chest. Set the assist so the last rep is a real fight'},
+      {n:'Seated Cable Row', m:'Lats · Mid back', s:'3 sets × 10–12', r:90, alt:'Neutral handle. Full stretch forward, no torso swing back'},
+      {n:'Lying Leg Curl', m:'Hamstrings', s:'3 sets × 10–12', r:90, alt:''},
+      {n:'Lateral Raise Machine', m:'Side delts — go light', s:'3 sets × 15–20', r:60, alt:''},
+      {n:'Cable Rope Hammer Curl', m:'Biceps · Brachialis', s:'3 sets × 10–12', r:60, alt:'Neutral grip — thumbs up throughout'},
+      {n:'Ab Crunch Machine', m:'Upper abs', s:'3 sets × 12–15', r:60, alt:''},
+      {n:'Captain\'s Chair Leg Raise', m:'Lower abs', s:'3 sets × 10–15', r:60, alt:'Knees up if straight legs are too hard'}
     ],
     fin:{t:'Zone 2 — 12 minutes', d:'Same as Day A. Steady, boring, effective. Never do this before you lift.'}
   }
@@ -427,7 +415,8 @@ function nextTrainingDay(){
 }
 
 const RULES = [
-  ['Machines on purpose','Every lift here is a machine or a cable: sit down, set one pin, go. No spotter, no bar to load, no balance to learn. You lose nothing that matters for how you look, and you get to push the last set to failure safely.'],
+  ['One machine at a time','No supersets, nothing to pair up, nothing that needs two machines free at once. Work down the list one machine at a time. If one is taken, skip it and come back.'],
+  ['Machines on purpose','Every lift is a machine or a cable: sit down, set one pin, go. No spotter, no bar to load, no balance to learn. You lose nothing that matters for how you look, and you get to push the last set to failure safely.'],
   ['Leave 1–2 reps in the tank','On compounds. Last set of the isolation work only, take it to the point where the next rep would fail.'],
   ['Double progression','Hit the <span class="k">top</span> of the rep range on every set → move the pin down one plate next time. If a full plate is too big a jump, add reps instead until it isn\'t. That\'s the whole method.'],
   ['Rest the full time','The rest numbers aren\'t suggestions. Cutting 3 minutes to 1 costs you reps, and reps are the point.'],
@@ -466,7 +455,7 @@ function exRow(it, id){
       ${it.alt ? `<div class="ex-alt">${it.alt}</div>` : ''}
       <div class="ex-meta">
         <span class="pill reps">${it.s}</span>
-        ${it.r ? `<button class="pill rest" onclick="startTimer(${it.r},'${it.n.replace(/'/g,"\\'")}')">⏱ ${fmt(it.r)} rest</button>` : ''}
+        ${it.r ? `<button class="pill rest" onclick="startTimer(${it.r},'${it.n.replace(/'/g,"\\'")}')">⏱ ${fmt(it.r)} between sets</button>` : ''}
         ${it.m ? `<span class="pill mus">${it.m}</span>` : ''}
       </div>
     </div>
@@ -513,19 +502,12 @@ function render(){
     + WARMUP.items.map((it,i) => exRow(it, 'W'+i)).join('')
     + `</div><p class="note">That's the whole warm-up. Stretching beforehand doesn't prevent injury and makes you weaker for the first sets &mdash; the ramp-up sets are the real preparation.</p></div>`;
 
-  const list = p.items.map((it,i) => {
-    if(it.ss){
-      return `<div class="card ss"><div class="ss-tag">Superset &mdash; both back to back, then rest ${fmt(it.r)}</div>`
-        + it.ss.map((x,j) => exRow(x, day+i+'-'+j)).join('')
-        + `<div class="ex" style="padding-top:0"><div style="flex:1"></div>
-             <button class="pill rest" onclick="startTimer(${it.r},'Superset')">&#9201; ${fmt(it.r)} rest</button></div>`
-        + `</div>`;
-    }
-    return `<div class="card">${exRow(it, day+i)}</div>`;
-  }).join('');
+  const list = p.items.map((it,i) => `<div class="card">${exRow(it, day+i)}</div>`).join('');
 
-  const ex = `<div class="sec"><div class="sec-h">${p.name} <em>${p.focus.replace('&amp;','&')} &middot; in order</em></div>`
-    + `<div class="exlist">${list}</div></div>`;
+  const ex = `<div class="sec"><div class="sec-h">${p.name} <em>${p.focus.replace('&amp;','&')}</em></div>`
+    + `<div class="exlist">${list}</div>`
+    + `<p class="note"><b>How to read this:</b> &ldquo;3 sets &times; 12&ndash;15&rdquo; means do 12&ndash;15 reps, rest the listed time, and repeat until you've done 3 sets &mdash; all on that one machine. Then move to the next.</p>`
+    + `<p class="note">If a machine is busy, skip it and come back at the end. Getting the sets in matters, the order doesn't.</p></div>`;
 
   const fin = `<div class="sec"><div class="sec-h">Cardio finisher <em>after lifting, not before</em></div>
         <div class="fin"><b>${p.fin.t}</b><p>${p.fin.d}</p></div></div>`;
