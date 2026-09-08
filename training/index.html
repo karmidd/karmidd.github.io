@@ -345,57 +345,57 @@ footer{margin:34px 0 10px;font-size:12px;color:var(--dim2);text-align:center}
 /* ------------------------------------------------------------------ data */
 const PLAN = {
   A: {
-    name: 'Day A', focus: 'Chest &amp; squat',
+    name: 'Day A', focus: 'Chest &amp; quads',
     items: [
-      {n:'Back Squat', m:'Quads · Glutes', s:'3 × 6–8', r:180, alt:'Hack squat or goblet squat if your gym is busy'},
-      {n:'Barbell Bench Press', m:'Chest · Front delt · Triceps', s:'4 × 6–8', r:150, alt:'Dumbbell bench if no spotter — go closer to failure safely'},
-      {n:'Chest-Supported Row', m:'Lats · Mid back', s:'4 × 8–10', r:120, alt:'Seated cable row, neutral grip'},
-      {n:'Incline Dumbbell Press', m:'Upper chest', s:'3 × 10–12', r:90, alt:'30° bench — higher and it becomes a shoulder press'},
+      {n:'Leg Press', m:'Quads · Glutes', s:'3 × 10–12', r:150, alt:'Sit, set the seat once, go. Feet mid-platform, don\'t lock the knees out hard'},
+      {n:'Chest Press Machine', m:'Chest · Front delt · Triceps', s:'4 × 8–10', r:120, alt:'Handles level with your mid-chest. No spotter needed, so push the last set hard'},
+      {n:'Seated Row Machine', m:'Lats · Mid back', s:'4 × 10–12', r:120, alt:'Chest-supported. Pull to your stomach, let the shoulder blades come apart at the front'},
+      {n:'Pec Deck', m:'Chest — the stretch', s:'3 × 12–15', r:90, alt:'One pin, one seat height. Slow on the way out'},
       {ss:[
-        {n:'Dumbbell Lateral Raise', m:'Side delts — shoulder width', s:'3 × 12–15'},
-        {n:'Standing Calf Raise', m:'Calves', s:'3 × 12–15'}
+        {n:'Lateral Raise Machine', m:'Side delts — shoulder width', s:'3 × 12–15'},
+        {n:'Calf Raise Machine', m:'Calves', s:'3 × 12–15'}
       ], r:60},
       {ss:[
-        {n:'Rope Overhead Triceps Extension', m:'Triceps, long head', s:'3 × 10–12'},
-        {n:'Dumbbell Hammer Curl', m:'Biceps · Brachialis · Forearm', s:'3 × 10–12'}
+        {n:'Rope Triceps Pushdown', m:'Triceps', s:'3 × 10–12'},
+        {n:'Cable Rope Hammer Curl', m:'Biceps · Brachialis · Forearm', s:'3 × 10–12'}
       ], r:60}
     ],
     fin:{t:'Zone 2 — 12 minutes', d:'Incline treadmill walk or bike. Hard enough that talking is annoying, easy enough that you could. This is the part that actually builds cardio.'}
   },
   B: {
-    name: 'Day B', focus: 'Back &amp; posterior',
+    name: 'Day B', focus: 'Back &amp; hamstrings',
     items: [
-      {n:'Weighted Pull-up', m:'Lats — the V taper', s:'4 × 6–10', r:150, alt:'Lat pulldown if you can\'t hit 6 clean reps yet'},
-      {n:'Incline Dumbbell Press', m:'Upper chest · Front delt', s:'4 × 8–10', r:150, alt:'Or flat barbell bench if Day A felt light'},
-      {n:'Bulgarian Split Squat', m:'Quads · Glutes · Balance', s:'3 × 8–10 per leg', r:120, alt:'Dumbbells at your sides. Brutal, worth it, replaces the deadlift'},
+      {n:'Lat Pulldown', m:'Lats — the V taper', s:'4 × 8–10', r:150, alt:'Wide-ish grip, pull to your collarbone, no leaning back'},
+      {n:'Incline Chest Press Machine', m:'Upper chest · Front delt', s:'4 × 8–10', r:120, alt:'If your gym has no incline machine, use the flat one and raise the seat a notch'},
       {n:'Seated Leg Curl', m:'Hamstrings', s:'3 × 10–12', r:90, alt:'Seated beats lying — better stretch on the hamstring'},
+      {n:'Leg Extension', m:'Quads', s:'3 × 12–15', r:90, alt:'Pause a beat at the top. This is where the teardrop above the knee comes from'},
       {ss:[
-        {n:'Cable Lateral Raise', m:'Side delts', s:'3 × 12–15'},
-        {n:'Standing Calf Raise', m:'Calves', s:'3 × 15–20'}
+        {n:'Reverse Pec Deck', m:'Rear delts · Posture', s:'3 × 15'},
+        {n:'Lateral Raise Machine', m:'Side delts', s:'3 × 12–15'}
       ], r:60},
       {ss:[
         {n:'Rope Triceps Pushdown', m:'Triceps', s:'3 × 10–12'},
         {n:'Cable Rope Hammer Curl', m:'Brachialis · Forearm', s:'3 × 12'}
       ], r:60},
-      {n:'Face Pull', m:'Rear delts · Posture', s:'3 × 15', r:45, alt:'Light. This is what stops the desk-hunch and keeps shoulders healthy'}
+      {n:'Calf Raise Machine', m:'Calves', s:'3 × 15–20', r:60, alt:''}
     ],
     fin:{t:'Intervals — 8 × (30s hard / 90s easy)', d:'Bike or rower, 16 minutes total. The hard 30s should be genuinely hard. One session like this a week does more for your cardio than three easy ones.'}
   },
   C: {
     name: 'Day C', focus: 'Shoulders &amp; arms',
     items: [
-      {n:'Leg Press', m:'Quads · Glutes', s:'3 × 10–12', r:150, alt:'Or hack squat. Feet mid-platform, don\'t lock out hard'},
-      {n:'Seated Dumbbell Shoulder Press', m:'Front &amp; side delts', s:'4 × 8–10', r:150, alt:'Seated with back support so you press instead of leaning'},
-      {n:'Chest Dip', m:'Lower chest · Triceps', s:'3 × 8–12', r:120, alt:'Lean forward. Machine chest press if dips hurt your shoulder'},
-      {n:'One-Arm Dumbbell Row', m:'Lats · Mid back', s:'3 × 10–12 per side', r:90, alt:'Full stretch at the bottom, no torso twist at the top'},
+      {n:'Hack Squat Machine', m:'Quads · Glutes', s:'3 × 10–12', r:150, alt:'Or the leg press again if hack squat is taken — same job, zero setup'},
+      {n:'Shoulder Press Machine', m:'Front &amp; side delts', s:'4 × 8–10', r:120, alt:'Back against the pad so you press instead of leaning into it'},
+      {n:'Assisted Dip Machine', m:'Lower chest · Triceps', s:'3 × 8–12', r:120, alt:'Lean forward for chest. Set the assist so the last rep is a real fight'},
+      {n:'Seated Cable Row', m:'Lats · Mid back', s:'3 × 10–12', r:90, alt:'Neutral handle. Full stretch forward, no torso swing back'},
       {n:'Lying Leg Curl', m:'Hamstrings', s:'3 × 10–12', r:90, alt:''},
       {ss:[
-        {n:'Lean-Away Lateral Raise', m:'Side delts — go light', s:'3 × 15–20'},
-        {n:'Incline Dumbbell Hammer Curl', m:'Biceps · Brachialis', s:'3 × 10–12'}
+        {n:'Lateral Raise Machine', m:'Side delts — go light', s:'3 × 15–20'},
+        {n:'Cable Rope Hammer Curl', m:'Biceps · Brachialis', s:'3 × 10–12'}
       ], r:60},
       {ss:[
-        {n:'Hanging Leg Raise', m:'Lower abs', s:'3 × 10–15'},
-        {n:'Cable Crunch', m:'Upper abs', s:'3 × 12–15'}
+        {n:'Ab Crunch Machine', m:'Upper abs', s:'3 × 12–15'},
+        {n:'Captain\'s Chair Leg Raise', m:'Lower abs', s:'3 × 10–15'}
       ], r:60}
     ],
     fin:{t:'Zone 2 — 12 minutes', d:'Same as Day A. Steady, boring, effective. Never do this before you lift.'}
@@ -406,8 +406,8 @@ const WARMUP = {
   items:[
     {n:'Treadmill incline walk', s:'4 min · 5.0 km/h · 8% incline',
      alt:'Warm and breathing a bit heavier, not sweating. On a bike instead: 4 min, resistance 5, ~70 rpm.'},
-    {n:'Ramp-up sets on the first lift', s:'Bar × 10 → 50% × 5 → 75% × 3',
-     alt:'60s between them, all well short of failure. Working at 60 kg? That\'s 20 × 10, 30 × 5, 45 × 3. These aren\'t working sets — don\'t tire yourself out.'}
+    {n:'Ramp-up sets on the first machine', s:'Light × 10 → 50% × 5 → 75% × 3',
+     alt:'60s between them, all well short of failure. Working at 60 kg on the stack? That\'s 20 × 10, 30 × 5, 45 × 3. These aren\'t working sets — don\'t tire yourself out.'}
   ]
 };
 
@@ -427,13 +427,14 @@ function nextTrainingDay(){
 }
 
 const RULES = [
+  ['Machines on purpose','Every lift here is a machine or a cable: sit down, set one pin, go. No spotter, no bar to load, no balance to learn. You lose nothing that matters for how you look, and you get to push the last set to failure safely.'],
   ['Leave 1–2 reps in the tank','On compounds. Last set of the isolation work only, take it to the point where the next rep would fail.'],
-  ['Double progression','Hit the <span class="k">top</span> of the rep range on every set → add 2.5 kg next time (1–2 kg on the small stuff). That\'s the whole method.'],
+  ['Double progression','Hit the <span class="k">top</span> of the rep range on every set → move the pin down one plate next time. If a full plate is too big a jump, add reps instead until it isn\'t. That\'s the whole method.'],
   ['Rest the full time','The rest numbers aren\'t suggestions. Cutting 3 minutes to 1 costs you reps, and reps are the point.'],
   ['Monday, Wednesday, Saturday','Never two sessions back to back. The gap isn\'t time off — it\'s when the muscle is actually built. Missed Monday? Push the whole week back a day, don\'t double up.'],
-  ['Only doing 2 days?','<b>Monday and Thursday</b> — run A then B, same two every week. Add <b>Seated Dumbbell Shoulder Press 3 × 8–10</b> to Day A. Everything still gets hit; Day C is the bonus, not the base.'],
-  ['No curls, by design','Every arm movement here is a hammer or neutral grip — brachialis and forearm, no supinated elbow flexion. Hammer curls build a thicker-looking arm anyway.'],
-  ['No deadlifts, by design','Hamstrings and glutes are covered by leg curls and split squats, with a fraction of the recovery cost. Nothing is missing.'],
+  ['Only doing 2 days?','<b>Monday and Thursday</b> — run A then B, same two every week. Add <b>Shoulder Press Machine 3 × 8–10</b> to Day A. Everything still gets hit; Day C is the bonus, not the base.'],
+  ['No curls, by design','Every arm movement is a rope hammer curl — neutral grip, brachialis and forearm, no supinated elbow flexion. It builds a thicker-looking arm anyway.'],
+  ['No deadlifts, by design','Hamstrings and glutes are covered by the leg curls, leg press and hack squat, at a fraction of the recovery cost. Nothing is missing.'],
   ['Deload every 8–10 weeks','One week at half the sets, same weights. You\'ll come back stronger. Skipping this is how people stall for months.']
 ];
 
