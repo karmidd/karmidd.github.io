@@ -359,8 +359,8 @@ const PLAN = {
     items: [
       {n:'Leg Press', m:'Quads · Glutes', s:'3 sets × 10–12', r:150, alt:'Sit, set the seat once, go. Feet mid-platform, don\'t lock the knees out hard'},
       {n:'Chest Press Machine', m:'Chest · Front delt · Triceps', s:'4 sets × 8–10', r:120, alt:'Handles level with your mid-chest. No spotter needed, so push the last set hard'},
-      {n:'Seated Row Machine', m:'Lats · Mid back', s:'4 sets × 10–12', r:120, alt:'Chest-supported. Pull to your stomach, let the shoulder blades come apart at the front'},
-      {n:'Pec Deck', m:'Chest — the stretch', s:'3 sets × 12–15', r:90, alt:'One pin, one seat height. Slow on the way out'},
+      {n:'Seated Row Machine', m:'Lats · Mid back', s:'4 sets × 10–12', r:90, alt:'Chest-supported. Pull to your stomach, let the shoulder blades come apart at the front'},
+      {n:'Pec Deck', m:'Chest — the stretch', s:'3 sets × 12–15', r:60, alt:'One pin, one seat height. Slow on the way out'},
       {n:'Lateral Raise Machine', m:'Side delts — shoulder width', s:'3 sets × 12–15', r:60, alt:'Light. Lead with the elbows, stop at shoulder height'},
       {n:'Calf Raise Machine', m:'Calves', s:'3 sets × 12–15', r:60, alt:'Full stretch at the bottom, pause at the top'},
       {n:'Rope Triceps Pushdown', m:'Triceps', s:'3 sets × 10–12', r:60, alt:'Elbows pinned to your sides, spread the rope at the bottom'},
@@ -371,10 +371,10 @@ const PLAN = {
   B: {
     name: 'Day B', focus: 'Back &amp; hamstrings',
     items: [
-      {n:'Lat Pulldown', m:'Lats — the V taper', s:'4 sets × 8–10', r:150, alt:'Wide-ish grip, pull to your collarbone, no leaning back'},
+      {n:'Lat Pulldown', m:'Lats — the V taper', s:'4 sets × 8–10', r:120, alt:'Wide-ish grip, pull to your collarbone, no leaning back'},
       {n:'Incline Chest Press Machine', m:'Upper chest · Front delt', s:'4 sets × 8–10', r:120, alt:'No incline machine? Use the flat one and raise the seat a notch'},
-      {n:'Seated Leg Curl', m:'Hamstrings', s:'3 sets × 10–12', r:90, alt:'Seated beats lying — better stretch on the hamstring'},
-      {n:'Leg Extension', m:'Quads', s:'3 sets × 12–15', r:90, alt:'Pause a beat at the top. This is where the teardrop above the knee comes from'},
+      {n:'Seated Leg Curl', m:'Hamstrings', s:'3 sets × 10–12', r:60, alt:'Seated beats lying — better stretch on the hamstring'},
+      {n:'Leg Extension', m:'Quads', s:'3 sets × 12–15', r:60, alt:'Pause a beat at the top. This is where the teardrop above the knee comes from'},
       {n:'Reverse Pec Deck', m:'Rear delts · Posture', s:'3 sets × 15', r:60, alt:'Light. This is what stops the desk-hunch and keeps shoulders healthy'},
       {n:'Lateral Raise Machine', m:'Side delts', s:'3 sets × 12–15', r:60, alt:''},
       {n:'Rope Triceps Pushdown', m:'Triceps', s:'3 sets × 10–12', r:60, alt:''},
@@ -388,9 +388,9 @@ const PLAN = {
     items: [
       {n:'Hack Squat Machine', m:'Quads · Glutes', s:'3 sets × 10–12', r:150, alt:'Or the leg press again if it\'s taken — same job, zero setup'},
       {n:'Shoulder Press Machine', m:'Front &amp; side delts', s:'4 sets × 8–10', r:120, alt:'Back against the pad so you press instead of leaning into it'},
-      {n:'Assisted Dip Machine', m:'Lower chest · Triceps', s:'3 sets × 8–12', r:120, alt:'Lean forward for chest. Set the assist so the last rep is a real fight'},
+      {n:'Assisted Dip Machine', m:'Lower chest · Triceps', s:'3 sets × 8–12', r:90, alt:'Lean forward for chest. Set the assist so the last rep is a real fight'},
       {n:'Seated Cable Row', m:'Lats · Mid back', s:'3 sets × 10–12', r:90, alt:'Neutral handle. Full stretch forward, no torso swing back'},
-      {n:'Lying Leg Curl', m:'Hamstrings', s:'3 sets × 10–12', r:90, alt:''},
+      {n:'Lying Leg Curl', m:'Hamstrings', s:'3 sets × 10–12', r:60, alt:''},
       {n:'Lateral Raise Machine', m:'Side delts — go light', s:'3 sets × 15–20', r:60, alt:''},
       {n:'Cable Rope Hammer Curl', m:'Biceps · Brachialis', s:'3 sets × 10–12', r:60, alt:'Neutral grip — thumbs up throughout'},
       {n:'Ab Crunch Machine', m:'Upper abs', s:'3 sets × 12–15', r:60, alt:''},
@@ -427,6 +427,7 @@ function nextTrainingDay(){
 const RULES = [
   ['One machine at a time','No supersets, nothing to pair up, nothing that needs two machines free at once. Work down the list one machine at a time. If one is taken, skip it and come back.'],
   ['Machines on purpose','Every lift is a machine or a cable: sit down, set one pin, go. No spotter, no bar to load, no balance to learn. You lose nothing that matters for how you look, and you get to push the last set to failure safely.'],
+  ['Don\'t cut the long rests','The 2:30 on leg press and hack squat, and the 2 min on the presses, are doing real work &mdash; go again too early and you lose reps, and reps are what build the muscle. Everything else has already been trimmed to the shortest rest that costs you nothing.'],
   ['How hard to push each set','On the big machines (leg press, chest press, pulldown, hack squat), stop when you could still manage one or two more reps. On the small stuff (raises, pushdowns, curls, calves), take the <span class="k">last</span> set until you genuinely cannot complete another rep.'],
   ['When to add weight','Once you hit the <span class="k">top</span> number of the rep range on every set — say all 3 sets at 15 reps when it says 12–15 — move the pin down one plate next time. You will drop back toward 12 reps at the heavier weight. Build back up, repeat. That is the whole method.'],
   ['Rest the full time','The rest numbers aren\'t suggestions. Cutting 3 minutes to 1 costs you reps, and reps are the point.'],
