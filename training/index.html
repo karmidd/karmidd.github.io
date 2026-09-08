@@ -147,6 +147,15 @@ button.pill.rest{
   background:transparent;transition:background .13s;
 }
 button.pill.rest:hover{background:var(--acc-dim)}
+a.pill.how{
+  text-decoration:none;color:var(--dim);border-color:#2f3a45;background:transparent;
+  transition:color .13s,background .13s;
+}
+a.pill.how:hover{color:var(--text);background:#1f262e}
+.ex-img{
+  display:block;width:100%;max-height:190px;object-fit:cover;
+  margin-top:10px;border-radius:10px;border:1px solid var(--line);background:#11151a;
+}
 
 /* ---------- simple list card ---------- */
 .list{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:4px 14px}
@@ -341,6 +350,7 @@ footer{margin:34px 0 10px;font-size:12px;color:var(--dim2);text-align:center}
   <div id="track"><div id="fill"></div></div>
 </div>
 
+<script src="/training/img/photos.js"></script>
 <script>
 /* ------------------------------------------------------------------ data */
 const PLAN = {
@@ -446,8 +456,17 @@ function save(){
 /* ------------------------------------------------------------------ render */
 const TICK = '<svg viewBox="0 0 24 24"><path d="M4 12.5l5.5 5.5L20 6"/></svg>';
 
+function photo(sl){
+  return (window.EX_PHOTOS && window.EX_PHOTOS[sl]) || '';
+}
+
+function slug(n){
+  return n.toLowerCase().replace(/['\u2019]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+}
+
 function exRow(it, id){
   const on = done.includes(id);
+  const sl = slug(it.n);
   return `<div class="ex${on?' done':''}" data-id="${id}">
     <button class="chk" onclick="toggle('${id}')" aria-label="done">${TICK}</button>
     <div class="ex-body">
@@ -457,7 +476,10 @@ function exRow(it, id){
         <span class="pill reps">${it.s}</span>
         ${it.r ? `<button class="pill rest" onclick="startTimer(${it.r},'${it.n.replace(/'/g,"\\'")}')">⏱ ${fmt(it.r)} between sets</button>` : ''}
         ${it.m ? `<span class="pill mus">${it.m}</span>` : ''}
+        <a class="pill how" target="_blank" rel="noopener"
+           href="https://www.youtube.com/results?search_query=${encodeURIComponent('how to ' + it.n)}">&#9654; how</a>
       </div>
+      ${photo(sl) ? `<img class="ex-img" alt="" loading="lazy" src="/training/img/${photo(sl)}">` : ''}
     </div>
   </div>`;
 }
